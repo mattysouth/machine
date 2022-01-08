@@ -252,7 +252,6 @@ def questioning():
     return response
 
 query()
-query_result()
 answering()
 questioning()
 
