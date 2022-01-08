@@ -216,16 +216,26 @@ def query_result():
         if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
             passages_array.append(Passage_topic[i]['sequence'])
             
-    while len(passages_array) < 3:
+    while len(passages_array) < 4:
         for i in range(len(Passage_topic)):
             if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
                 passages_array.append(Passage_topic[i]['sequence'])
     return passages_array
 
 def randompicker():
-    final_passage.append(random.sample(query_result(),2))
+    final_passage.append(random.sample(query_result(),3))
     # conct_passage = " ".join(final_passage[0],final_passage[1],final_passage[2])
     return final_passage
+
+def summarization():
+    API_URL = "https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-12-6"
+    headers = {"Authorization": "Bearer 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"}
+    payload = ({
+    "inputs": randompicker(),
+    })
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+
 
 def answering():
     API_URL = "https://api-inference.huggingface.co/models/phiyodr/bart-large-finetuned-squad2"
@@ -233,7 +243,7 @@ def answering():
     payload = ({
     "inputs": {
 		"question": Ques,
-		"context": randompicker()[0][0],
+		"context": summarization['summary_text'],
         },
     })
     output = requests.post(API_URL, headers=headers, json=payload)
