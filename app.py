@@ -173,8 +173,8 @@ China could seize the opportunity, militarily or by other means, to enhance its 
 
 """After 20 years of Putin, Western countries have still not devised a comprehensive strategy to combat his ability to disrupt those he perceives as adversaries."""]
 
-st.header("Prototyping an NLP solution")
-st.text("This demo uses a model for Question Answering.")
+st.header("War, Beliefs, Sustainability")
+st.text("This demo uses different ML models to help people think about different shapes of the future.")
 add_text_sidebar = st.sidebar.title("Menu")
 add_text_sidebar = st.sidebar.text("Just some random text.")
 Ques = st.text_input(label='Insert a question.')
