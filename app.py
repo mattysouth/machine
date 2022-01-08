@@ -213,7 +213,7 @@ def query_result():
         if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
             passages_array.append(Passage_topic[i]['sequence'])
             
-    while len(passages_array) < 4:
+    while len(passages_array) < 3:
         for i in range(len(Passage_topic)):
             if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
                 passages_array.append(Passage_topic[i]['sequence'])
