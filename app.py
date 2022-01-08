@@ -173,9 +173,14 @@ China could seize the opportunity, militarily or by other means, to enhance its 
 
 """After 20 years of Putin, Western countries have still not devised a comprehensive strategy to combat his ability to disrupt those he perceives as adversaries."""]
 
+st.header("Prototyping an NLP solution")
+st.text("This demo uses a model for Question Answering.")
+add_text_sidebar = st.sidebar.title("Menu")
+add_text_sidebar = st.sidebar.text("Just some random text.")
+Ques = st.text_input(label='Insert a question.')
 
 
-Ques = st.text_input('Enter some text')
+
 Question_topic =[]
 Passage_topic =[]
 Relevant = []
@@ -203,8 +208,6 @@ def query():
         output = requests.post(API_URL, headers=headers, json=payload)
         response = output.json()
         Passage_topic.append(response)
-    # print(Question_topic)
-    # print(Passage_topic)
     return Question_topic, Passage_topic
 
 
@@ -251,9 +254,10 @@ def questioning():
     st.write(response)
     return response
 
-query()
-answering()
-questioning()
+if (not len(Ques)==0):
+    query()
+    answering()
+    questioning()
 
 
 
