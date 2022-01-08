@@ -243,7 +243,7 @@ def answering():
     payload = ({
     "inputs": {
 		"question": Ques,
-		"context": summarization['summary_text'],
+		"context": summarization[0]['summary_text'],
         },
     })
     output = requests.post(API_URL, headers=headers, json=payload)
