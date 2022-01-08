@@ -222,7 +222,6 @@ def query_result():
                 passages_array.append(Passage_topic[i]['sequence'])
     return passages_array
 
-
 def randompicker():
     final_passage.append(random.sample(query_result(),2))
     # conct_passage = " ".join(final_passage[0],final_passage[1],final_passage[2])
@@ -231,7 +230,6 @@ def randompicker():
 def answering():
     API_URL = "https://api-inference.huggingface.co/models/phiyodr/bart-large-finetuned-squad2"
     headers = {"Authorization": "Bearer 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"}
-    print(randompicker()[0])
     payload = ({
     "inputs": {
 		"question": Ques,
@@ -241,7 +239,7 @@ def answering():
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
     st.write(response)
-    return response 
+    return response['answer'] 
 
 
 def questioning():
@@ -252,7 +250,7 @@ def questioning():
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
     st.write(response)
-    return response
+    return response['generated_text']
 
 if (not len(Ques)==0):
     query()
