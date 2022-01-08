@@ -233,8 +233,9 @@ def summarization():
     payload = ({
     "inputs": randompicker(),
     })
-    response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
+    output = requests.post(API_URL, headers=headers, json=payload)
+    response = output.json()
+    return response
 
 
 def answering():
@@ -243,13 +244,12 @@ def answering():
     payload = ({
     "inputs": {
 		"question": Ques,
-		"context": summarization[0]['summary_text'],
+		"context": summarization()[0]['summary_text'],
         },
     })
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    st.write(response)
-    return response['answer'] 
+    st.write(response['answer'] )
 
 
 def questioning():
@@ -259,8 +259,9 @@ def questioning():
     
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    st.write(response)
-    return response['generated_text']
+    for i in range(len(response)):
+        st.write(response[i]['generated_text'])
+    
 
 if (not len(Ques)==0):
     query()
