@@ -173,10 +173,8 @@ China could seize the opportunity, militarily or by other means, to enhance its 
 
 """After 20 years of Putin, Western countries have still not devised a comprehensive strategy to combat his ability to disrupt those he perceives as adversaries."""]
 
-st.header("War, Beliefs, Sustainability")
+st.header("The Problem of Evil")
 st.text("This demo uses different ML models to help people think about different shapes of the future.")
-add_text_sidebar = st.sidebar.title("Menu")
-add_text_sidebar = st.sidebar.text("Just some random text.")
 Ques = st.text_input(label='Insert a question.')
 
 
@@ -249,7 +247,9 @@ def answering():
     })
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    st.write(response['answer'] )
+    if response == None:
+        st.write("ask one more time")
+    st.write(response["answer"])
 
 
 def questioning():
@@ -259,9 +259,10 @@ def questioning():
     
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    for i in range(len(response)):
-        st.write(response[i]['generated_text'])
-    
+    st.write(response[0]["generated_text"])
+    st.write(response[1]["generated_text"])
+    st.write(response[2]["generated_text"])
+    return response
 
 if (not len(Ques)==0):
     query()
