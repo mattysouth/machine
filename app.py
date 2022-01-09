@@ -53,8 +53,9 @@ This claim is based on statements of Russian leaders that possible integration o
 The crisis has caused international tension, also involving the United States, NATO, the European Union and the Commonwealth of Independent States.""",
 
 """Ukraine has sharply intensified diplomatic efforts. On 15 November, 2021, Volodymyr Zelensky and the head of the European Council Charles Michel discussed 
-"the security situation along the borders of Ukraine." On the same day, Dmytro Kuleba held talks on the same issues in Brussels. 
-The new head of the Defense Ministry, Oleksii Rezikov, went to Washington, where on 18 November,2021, he met with US Secretary of Defense Lloyd Austin. 
+"the security situation along the borders of Ukraine." On the same day, Dmytro Kuleba held talks on the same issues in Brussels.""",
+
+"""The new head of the Defense Ministry, Oleksii Rezikov, went to Washington, where on 18 November,2021, he met with US Secretary of Defense Lloyd Austin. 
 On 16 November,2021, British Defense Minister Ben Wallace visited Kyiv. According to the tabloid Daily Mirror, a consolidated rapid response unit of about 
 600 fighters has been formed in the UK for transfer to Ukraine.""",
 
@@ -77,10 +78,7 @@ Putin’s seizure of the Crimean Peninsula, Russian military units rolled into e
 Russian-speaking Ukrainian separatists backed by Moscow.""",
 
 """These days it feels like we are back in the days of Soviet leader Leonid Brezhnev. Scanning through Russia’s national TV channels, Russia 1 and First Channel, one could not help but feel 
-transported to the 1970s. Warmongering rhetoric is back and so is staple criticism of the decadent West;
-film offerings range from the 1976 classic, Irony of Fate, to the 1967 comedy, Kidnapping, Caucasian Style, to, The Diamond Arm, a smash hit from 1969.
-At the 30th anniversary of the Soviet Union’s disintegration, the Russian public is fed a healthy diet of nostalgia for the good old days of order and social stability.
-Back-to-the-past seems to be the mood in Moscow’s foreign policy, too. US-Russia summitry is becoming a regular feature of relations, a flashback to the height of the Cold War.""",
+transported to the 1970s. Warmongering rhetoric is back and so is staple criticism of the decadent West. Back-to-the-past seems to be the mood in Moscow’s foreign policy, too. US-Russia summitry is becoming a regular feature of relations, a flashback to the height of the Cold War.""",
 
 """On December 30,2021, US President Joe Biden and Russian President Vladimir Putin had a phone call to discuss tensions over Ukraine. Reportedly, each of them issued warnings to the 
 other side but overall the tone was “constructive”.The exchange came on the heels of a meeting between the two leaders via a video link held on December 7, 2021 
@@ -107,10 +105,12 @@ Georgia in April 2008 that they could one day join. The draft furthermore requir
 members, as it started doing following Russia’s 2014 annexation of Crimea. Moscow also wants NATO to commit not to deploy intermediate-range missiles close to its borders.""",
 
 """Last but not least, the proposals call for an end to military assistance to Ukraine, whether provided by the US or through NATO, as well as a halt on 
-alliance exercises involving post-Soviet countries. In essence, Russia wants to turn the clock back to the late 1990s, evicting the West from Eastern 
+alliance exercises involving post-Soviet countries.""",
+
+"""In essence, Russia wants to turn the clock back to the late 1990s, evicting the West from Eastern 
 Europe and cementing its hegemonic position in its so-called “near abroad”. In pursuing those goals, the Kremlin is leveraging its military clout. 
 According to estimates, more than 100,000 Russian troops and heavy weaponry are currently deployed near the Russian-Ukrainian border as well as 
-in the annexed Crimean Peninsula. """,
+in the annexed Crimean Peninsula.""",
 
 """A good part has been deployed since early 2021. An operation against Ukraine is, therefore, not off the table. 
 Putin might be bluffing but should he decide to move against the neighbouring country, he would have no trouble whatsoever.
@@ -126,8 +126,9 @@ of Ukraine and Georgia which, contrary to what the Kremlin believes, have intere
 But to be sure, there is plenty of scepticism, too. """,
 
 """Some pundits are suggesting that Russia’s publication of the draft treaties, 
-before the actual talks, is a clever ploy to undermine the diplomatic track and create a pretext for military action against Ukraine.
-To succeed in this game, the US and its allies need to negotiate with the Russians from a position of strength. As in Brezhnev’s days, 
+before the actual talks, is a clever ploy to undermine the diplomatic track and create a pretext for military action against Ukraine.""",
+
+"""To succeed in this game, the US and its allies need to negotiate with the Russians from a position of strength. As in Brezhnev’s days, 
 they need to credibly deter Moscow in order to open space for real negotiations. That is why, the US is communicating to Putin 
 its readiness to ramp up economic sanctions - “like none he’d ever seen”, in Biden’s words - in case of war.""",
 
@@ -142,14 +143,16 @@ as a near geopolitical peer. At a time, when the US is fixated on rising China, 
 Russia may be a pale shadow of its predecessor, but from the Kremlin’s perspective, it is doing its best to stay in the game.""",
 
 """The U.S. and its allies may further reinforce NATO’s eastern flank with major ground and air units. They might increase stocks of PGMs, such as the new medium-range 
-ballistic Precision Strike Missile. Given Russia’s potential mass use of long-range PGMs, NATO may have to improve its aerospace defenses. 
-There is no U.S. or NATO consensus to insert their own combat forces into Ukraine. One reason may be fear that direct combat could lead to a wider 
+ballistic Precision Strike Missile. Given Russia’s potential mass use of long-range PGMs, NATO may have to improve its aerospace defenses. """,
+
+"""There is no U.S. or NATO consensus to insert their own combat forces into Ukraine. One reason may be fear that direct combat could lead to a wider 
 European war, perhaps even risking a Russian nuclear threat.""",
 
 """Russian President Vladimir Putin has said that in 2014 “we were ready” to put nuclear weapons on alert.
 In 2018, he showed a boastful video simulating a nuclear-armed missile attacking Florida. While Ukrainians may be unable to defeat a large-scale invasion, 
-they could inflict high casualties, a sensitive issue in Russia. Occupying forces might be
-stretched thin and vulnerable to stay-behind insurgents. In sum, the U.S., its NATO allies and Ukraine could impose immediate and painful costs 
+they could inflict high casualties, a sensitive issue in Russia.""",
+
+"""Russian occupying forces might bestretched thin and vulnerable to stay-behind insurgents. In sum, the U.S., its NATO allies and Ukraine could impose immediate and painful costs 
 on any Russian invaders. And for many years thereafter, Russia could face reinforced NATO military power.""",
 
 """Recent days have seen a new flurry of Western media reports that U.S. intelligence believes that Russia is planning to invade Ukraine early in the new year. 
@@ -184,6 +187,10 @@ Passage_topic =[]
 Relevant = []
 passages_array=[]
 final_passage = []
+
+
+
+
 
 
 def query():
@@ -242,14 +249,15 @@ def answering():
     payload = ({
     "inputs": {
 		"question": Ques,
-		"context": summarization()[0]['summary_text'],
+		"context": randompicker()[0][0],
         },
     })
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    if response == None:
-        st.write("ask one more time")
-    st.write(response["answer"])
+    if response["answer"] ==  None:
+        response["answer"] = "Try once more!"
+    else:
+        st.write("Answer: " + response["answer"])
 
 
 def questioning():
@@ -259,9 +267,9 @@ def questioning():
     
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    st.write(response[0]["generated_text"])
-    st.write(response[1]["generated_text"])
-    st.write(response[2]["generated_text"])
+    st.write("Question: " + response[0]["generated_text"])
+    st.write("Question: " + response[1]["generated_text"])
+    st.write("Question: " + response[2]["generated_text"])
     return response
 
 if (not len(Ques)==0):
