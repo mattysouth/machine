@@ -77,8 +77,9 @@ United States and its allies and partners will respond decisively if Russia furt
 Putin’s seizure of the Crimean Peninsula, Russian military units rolled into eastern Ukraine in a successful bid to prevent Ukraine’s military from defeating 
 Russian-speaking Ukrainian separatists backed by Moscow.""",
 
-"""These days it feels like we are back in the days of Soviet leader Leonid Brezhnev. Scanning through Russia’s national TV channels, Russia 1 and First Channel, one could not help but feel 
-transported to the 1970s. Warmongering rhetoric is back and so is staple criticism of the decadent West. Back-to-the-past seems to be the mood in Moscow’s foreign policy, too. US-Russia summitry is becoming a regular feature of relations, a flashback to the height of the Cold War.""",
+"""These days it feels like we are back in the days of Soviet leader Leonid Brezhnev. One could not help but feel transported to the 1970s based on Russia's national media.
+Warmongering rhetoric is back and so is staple criticism of the decadent West. Back-to-the-past seems to be the mood in Moscow’s foreign policy, too. US-Russia summitry is
+becoming a regular feature of relations, a flashback to the height of the Cold War.""",
 
 """On December 30,2021, US President Joe Biden and Russian President Vladimir Putin had a phone call to discuss tensions over Ukraine. Reportedly, each of them issued warnings to the 
 other side but overall the tone was “constructive”.The exchange came on the heels of a meeting between the two leaders via a video link held on December 7, 2021 
@@ -177,7 +178,7 @@ China could seize the opportunity, militarily or by other means, to enhance its 
 """After 20 years of Putin, Western countries have still not devised a comprehensive strategy to combat his ability to disrupt those he perceives as adversaries."""]
 
 st.header("The Problem of Evil")
-st.text("This demo uses different ML models to help people think about different shapes of the future.")
+st.subheader("This demo uses different ML models to help people think about different shapes of the future.")
 Ques = st.text_input(label='Insert a question.')
 
 
@@ -276,20 +277,4 @@ if (not len(Ques)==0):
     query()
     answering()
     questioning()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
