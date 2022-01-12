@@ -3,12 +3,7 @@ import random
 import requests
 from requests.api import get
 import streamlit as st
-import torch
-import numpy as np
-from transformers import BertForQuestionAnswering
-from transformers import BertTokenizer
-model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
-tokenizer_for_bert = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+
 
 passages=[
     
@@ -251,85 +246,28 @@ def summarization():
     return response
 
 
-# def answering():
-#     API_URL = "https://api-inference.huggingface.co/models/phiyodr/bart-large-finetuned-squad2"
-#     headers = {"Authorization": "Bearer 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"}
-#     for i in range(len(final_passage)):
-#         payload = ({
-#         "inputs": {
-#             "question": Ques,
-#             "context": randompicker()[0][i],
-#             },
-#         })
-#         output = requests.post(API_URL, headers=headers, json=payload)
-#         response = output.json()
-#         st.write("Answer: " + response["answer"])
+def answering(p):
+    API_URL = "https://api-inference.huggingface.co/models/phiyodr/bart-large-finetuned-squad2"
+    headers = {"Authorization": "Bearer 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"}
+    for i in range(len(final_passage)):
+        payload = ({
+        "inputs": {
+            "question": Ques,
+            "context": p,
+            },
+        })
+        output = requests.post(API_URL, headers=headers, json=payload)
+        response = output.json()
+        st.write("Answer: " + response["answer"])
 
 
-def bert_answering_machine ( question, passage, max_len =  512):
-    input_ids = tokenizer_for_bert.encode ( question, passage,  max_length= max_len, truncation=True)  
-    
-    
-    cls_index = input_ids.index(102)
-    len_question = cls_index + 1
-    len_answer = len(input_ids)- len_question
-    
-    segment_ids =  [0]*len_question + [1]*(len_answer)
-    tokens = tokenizer_for_bert.convert_ids_to_tokens(input_ids) 
-    
-    start_token_scores = model(torch.tensor([input_ids]), token_type_ids=torch.tensor([segment_ids]) )[0]
-    end_token_scores = model(torch.tensor([input_ids]), token_type_ids=torch.tensor([segment_ids]) )[1]
-
-    start_token_scores = start_token_scores.detach().numpy().flatten()
-    end_token_scores = end_token_scores.detach().numpy().flatten()
-    
-    answer_start_index = np.argmax(start_token_scores)
-    answer_end_index = np.argmax(end_token_scores)
-
-    start_token_score = np.round(start_token_scores[answer_start_index], 2)
-    end_token_score = np.round(end_token_scores[answer_end_index], 2)
-    
-    answer = tokens[answer_start_index]
-    for i in range(answer_start_index + 1, answer_end_index + 1):
-        if tokens[i][0:2] == '##':
-            answer += tokens[i][2:]
-        else:
-            answer += ' ' + tokens[i]
-            
-    # Few patterns indicating that BERT does not get answer from the passage for question asked
-    if ( answer_start_index == 0) or (start_token_score < 0 ) or  (answer == '[SEP]') or ( answer_end_index <  answer_start_index):
-        answer = "Sorry!, I could not find  an answer in the passage."
-
-
-def get_answer(q, p_array):
-    score_list = []
-    ans_list = []
-    j_list = []
+def get_answer(p_array):
     for j in range (len(p_array)):  
         p = p_array[j] 
 
-        start, end , start_score, end_score,  ans = bert_answering_machine (q, p)
+        answer = answering (p)
         
-        if (start != 0) and (start_score > 0.25)  and (ans != '[SEP]')  :
-            score_list.append(str(start_score) + ' and ' + str(end_score))
-            ans_list.append(ans)
-            j_list.append(j)
-        else:
-            text_num = None
-            token_scores = None
-            answer = "No Answer From BERT"
-
-            
-    if len(score_list) > 0 :
-        ind = np.argmax(score_list)
-        text_num = j_list[ind]
-        token_scores = score_list[ind]
-        answer = ans_list[ind]
-    else:
-        text_num = None
-        token_scores = None
-        answer = "No Answer From BERT"
-    return text_num, token_scores, answer
+    return answer
 
 
 def questioning():
@@ -346,7 +284,22 @@ def questioning():
 
 if (not len(Ques)==0):
     query()
-    get_answer(Ques, randompicker()[0])
+    get_answer(randompicker()[0])
     questioning()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
