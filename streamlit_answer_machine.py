@@ -180,7 +180,7 @@ China could seize the opportunity, militarily or by other means, to enhance its 
 """After 20 years of Putin, Western countries have still not devised a comprehensive strategy to combat his ability to disrupt those he perceives as adversaries."""]
 
 st.header("The Problem of Evil")
-st.subheader("This demo uses different ML models to help people think about different shapes of the future.")
+st.subheader("Russo-Ukranian Conflict QA App")
 Ques = st.text_input(label='Insert a question.')
 
 
