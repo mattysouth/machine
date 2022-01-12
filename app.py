@@ -256,9 +256,7 @@ def answering():
         })
         output = requests.post(API_URL, headers=headers, json=payload)
         response = output.json()
-        if response["answer"] ==  None:
-            response["answer"] = "Try once more!"
-        else:
+        if response["answer"] !=  None:
             st.write("Answer: " + response["answer"])
 
 
@@ -278,3 +276,20 @@ if (not len(Ques)==0):
     query()
     answering()
     questioning()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
