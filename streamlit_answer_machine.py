@@ -230,7 +230,7 @@ final_passage = []
 #     return passages_array
 
 def randompicker():
-    final_passage.append(random.sample(passages(),5))
+    final_passage = (random.sample(passages(),5))
     return final_passage
 
 def summarization():
