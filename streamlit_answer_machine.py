@@ -256,7 +256,7 @@ def answering(p):
         })
         output = requests.post(API_URL, headers=headers, json=payload)
         response = output.json()
-        st.write("Answer: " + response["answer"])
+        return response
 
 
 def get_answer(p_array):
@@ -264,7 +264,7 @@ def get_answer(p_array):
         p = p_array[j] 
 
         answer = answering (p)
-        
+        st.write("Answer: " + answer)
     return answer
 
 
