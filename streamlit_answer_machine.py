@@ -279,10 +279,6 @@ def questioning():
     response = output.json()
     if len(response) != 0:
         st.button(response[0]["generated_text"])
-        st.button(response[1]["generated_text"])
-        st.button(response[2]["generated_text"])
-        st.button(response[3]["generated_text"])
-        st.button(response[4]["generated_text"])
     return response
 
 if (not len(Ques)==0):
