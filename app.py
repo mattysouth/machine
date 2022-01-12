@@ -221,11 +221,11 @@ def query_result():
     for i in range(len(Passage_topic)):
         if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
             passages_array.append(Passage_topic[i]['sequence'])
-            
-    while len(passages_array) < 6:
-        for i in range(len(Passage_topic)):
-            if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
-                passages_array.append(Passage_topic[i]['sequence'])
+    if len(passages_array) < 5:        
+        while len(passages_array) < 6:
+            for i in range(len(Passage_topic)):
+                if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
+                    passages_array.append(Passage_topic[i]['sequence'])
     return passages_array
 
 def randompicker():
@@ -277,5 +277,4 @@ if (not len(Ques)==0):
     query()
     answering()
     questioning()
-
 
