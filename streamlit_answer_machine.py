@@ -194,43 +194,63 @@ final_passage = []
 
 
 
-
-
-def query():
-    API_URL = "https://api-inference.huggingface.co/models/cross-encoder/nli-distilroberta-base"
+def similar():
+    API_URL = "https://api-inference.huggingface.co/models/flax-sentence-embeddings/all_datasets_v3_roberta-large"
     headers = {"Authorization": "Bearer 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"}
-    payload = {
-        "inputs": Ques,
-        "parameters": {"candidate_labels": ["peace","war"]},
-    }
-    output = requests.post(API_URL, headers=headers, json=payload)
-    response = output.json()
-    Question_topic.append(response)
-
-
-    for passage in passages:
-        payload = {
-        "inputs": passage,
-        "parameters": {"candidate_labels": ["peace", "war"]},
-    }
-        output = requests.post(API_URL, headers=headers, json=payload)
-        response = output.json()
-        Passage_topic.append(response)
-
-
-def query_result():
-    for i in range(len(Passage_topic)):
-        if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
-            passages_array.append(Passage_topic[i]['sequence'])
-    if len(passages_array) < 5:        
-        while len(passages_array) < 6:
-            for i in range(len(Passage_topic)):
-                if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
-                    passages_array.append(Passage_topic[i]['sequence'])
+    payload = ({
+    "inputs": {
+		"source_sentence": Ques,
+		"sentences": passages
+	},
+    })
+    response = requests.post(API_URL, headers=headers, json=payload)
+    output = response.json()
+    N = 4
+    res = sorted(range(len(output)), key = lambda sub: output[sub])[-N:]
+    print("Indices list of max N elements is : " + str(res))
+    for i in range(N):
+        passages_array.append(passages[res[i]])
     return passages_array
 
+
+
+
+
+# def query():
+#     API_URL = "https://api-inference.huggingface.co/models/cross-encoder/nli-distilroberta-base"
+#     headers = {"Authorization": "Bearer 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"}
+#     payload = {
+#         "inputs": Ques,
+#         "parameters": {"candidate_labels": ["peace","war"]},
+#     }
+#     output = requests.post(API_URL, headers=headers, json=payload)
+#     response = output.json()
+#     Question_topic.append(response)
+
+
+#     for passage in passages:
+#         payload = {
+#         "inputs": passage,
+#         "parameters": {"candidate_labels": ["peace", "war"]},
+#     }
+#         output = requests.post(API_URL, headers=headers, json=payload)
+#         response = output.json()
+#         Passage_topic.append(response)
+
+
+# def query_result():
+#     for i in range(len(Passage_topic)):
+#         if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
+#             passages_array.append(Passage_topic[i]['sequence'])
+#     if len(passages_array) < 5:        
+#         while len(passages_array) < 6:
+#             for i in range(len(Passage_topic)):
+#                 if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
+#                     passages_array.append(Passage_topic[i]['sequence'])
+#     return passages_array
+
 def randompicker():
-    final_passage = (random.sample(query_result(),5))
+    final_passage = (random.sample(similar(),3))
     return final_passage
 
 def summarization():
@@ -273,7 +293,7 @@ def get_answer(p_array):
 def questioning():
     API_URL = "https://api-inference.huggingface.co/models/Salesforce/mixqg-large"
     headers = {"Authorization": "Bearer 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"}
-    payload = {"inputs": random.choice(randompicker())}
+    payload = {"inputs": random.choice(randompicker()[0])}
     
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
@@ -283,7 +303,7 @@ def questioning():
 
 if (not len(Ques)==0):
     query()
-    get_answer(randompicker())
+    get_answer(randompicker()[0])
     questioning()
 
 
