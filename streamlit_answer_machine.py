@@ -266,7 +266,8 @@ def get_answer(p_array):
         answer = answering (p)
         if answer == None:
             st.write("hmmmm....")
-        st.write("Answer: " + answer)
+        else:
+            st.write("Answer: " + answer)
     return answer
 
 
