@@ -293,7 +293,7 @@ def get_answer(p_array):
 def questioning():
     API_URL = "https://api-inference.huggingface.co/models/Salesforce/mixqg-large"
     headers = {"Authorization": "Bearer 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"}
-    payload = {"inputs": random.choice(randompicker()[0])}
+    payload = {"inputs": random.choice(randompicker())}
     
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
