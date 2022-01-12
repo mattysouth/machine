@@ -247,16 +247,15 @@ def summarization():
 def answering(p):
     API_URL = "https://api-inference.huggingface.co/models/phiyodr/bart-large-finetuned-squad2"
     headers = {"Authorization": "Bearer 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"}
-    for i in range(len(final_passage)):
-        payload = ({
+    payload = ({
         "inputs": {
             "question": Ques,
-            "context": randompicker()[i],
+            "context": p,
             },
         })
-        output = requests.post(API_URL, headers=headers, json=payload)
-        response = output.json()
-        return response
+    output = requests.post(API_URL, headers=headers, json=payload)
+    response = output.json()
+    return response
 
 
 def get_answer(p_array):
