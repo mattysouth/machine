@@ -256,8 +256,6 @@ def answering(p):
         })
         output = requests.post(API_URL, headers=headers, json=payload)
         response = output.json()
-        if len(response["answer"]) == 0:
-            st.write("hmmmm...")
         st.write("Answer: " + response["answer"])
 
 
