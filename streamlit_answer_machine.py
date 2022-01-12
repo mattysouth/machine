@@ -230,7 +230,7 @@ def query_result():
     return passages_array
 
 def randompicker():
-    final_passage = (random.sample(query_result,5))
+    final_passage = (random.sample(query_result(),5))
     return final_passage
 
 def summarization():
