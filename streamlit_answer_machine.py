@@ -346,22 +346,7 @@ def questioning():
 
 if (not len(Ques)==0):
     query()
-    get_answer(Ques, randompicker())
+    get_answer(Ques, randompicker()[0])
     questioning()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
