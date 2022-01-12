@@ -205,7 +205,7 @@ def similar():
     })
     response = requests.post(API_URL, headers=headers, json=payload)
     output = response.json()
-    N = 4
+    N = 6
     res = sorted(range(len(output)), key = lambda sub: output[sub])[-N:]
     print("Indices list of max N elements is : " + str(res))
     for i in range(N):
