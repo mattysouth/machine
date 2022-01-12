@@ -196,42 +196,41 @@ final_passage = []
 
 
 
-def query():
-    API_URL = "https://api-inference.huggingface.co/models/cross-encoder/nli-distilroberta-base"
-    headers = {"Authorization": "Bearer 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"}
-    payload = {
-        "inputs": Ques,
-        "parameters": {"candidate_labels": ["europe","ukraine", "russia", "united states", "china", "nato", "crimea", "diplomacy", "war"]},
-    }
-    output = requests.post(API_URL, headers=headers, json=payload)
-    response = output.json()
-    Question_topic.append(response)
+# def query():
+#     API_URL = "https://api-inference.huggingface.co/models/cross-encoder/nli-distilroberta-base"
+#     headers = {"Authorization": "Bearer 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"}
+#     payload = {
+#         "inputs": Ques,
+#         "parameters": {"candidate_labels": ["europe","ukraine", "russia", "united states", "china", "nato", "crimea", "diplomacy", "war"]},
+#     }
+#     output = requests.post(API_URL, headers=headers, json=payload)
+#     response = output.json()
+#     Question_topic.append(response)
 
 
-    for passage in passages:
-        payload = {
-        "inputs": passage,
-        "parameters": {"candidate_labels": ["europe","ukraine", "russia", "united states", "china", "nato", "crimea", "diplomacy", "war"]},
-    }
-        output = requests.post(API_URL, headers=headers, json=payload)
-        response = output.json()
-        Passage_topic.append(response)
+#     for passage in passages:
+#         payload = {
+#         "inputs": passage,
+#         "parameters": {"candidate_labels": ["europe","ukraine", "russia", "united states", "china", "nato", "crimea", "diplomacy", "war"]},
+#     }
+#         output = requests.post(API_URL, headers=headers, json=payload)
+#         response = output.json()
+#         Passage_topic.append(response)
 
 
-def query_result():
-    for i in range(len(Passage_topic)):
-        if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
-            passages_array.append(Passage_topic[i]['sequence'])
-    if len(passages_array) < 5:        
-        while len(passages_array) < 6:
-            for i in range(len(Passage_topic)):
-                if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
-                    passages_array.append(Passage_topic[i]['sequence'])
-    return passages_array
+# def query_result():
+#     for i in range(len(Passage_topic)):
+#         if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
+#             passages_array.append(Passage_topic[i]['sequence'])
+#     if len(passages_array) < 5:        
+#         while len(passages_array) < 6:
+#             for i in range(len(Passage_topic)):
+#                 if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
+#                     passages_array.append(Passage_topic[i]['sequence'])
+#     return passages_array
 
 def randompicker():
-    final_passage.append(random.sample(query_result(),5))
-    # conct_passage = " ".join(final_passage[0],final_passage[1],final_passage[2])
+    final_passage.append(random.sample(passages(),5))
     return final_passage
 
 def summarization():
