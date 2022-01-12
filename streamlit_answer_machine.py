@@ -278,7 +278,7 @@ def questioning():
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
     if len(response) != 0:
-        st.button("Question: " + response[0])
+        st.button(response[0])
     return response
 
 if (not len(Ques)==0):
