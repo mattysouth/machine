@@ -222,14 +222,14 @@ def query_result():
         if Question_topic[0]['labels'][0] == Passage_topic[i]['labels'][0]:
             passages_array.append(Passage_topic[i]['sequence'])
             
-    while len(passages_array) < 4:
+    while len(passages_array) < 6:
         for i in range(len(Passage_topic)):
             if Question_topic[0]['labels'][1] == Passage_topic[i]['labels'][0]:
                 passages_array.append(Passage_topic[i]['sequence'])
     return passages_array
 
 def randompicker():
-    final_passage.append(random.sample(query_result(),3))
+    final_passage.append(random.sample(query_result(),5))
     # conct_passage = " ".join(final_passage[0],final_passage[1],final_passage[2])
     return final_passage
 
@@ -277,4 +277,5 @@ if (not len(Ques)==0):
     query()
     answering()
     questioning()
+
 
