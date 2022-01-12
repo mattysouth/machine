@@ -251,7 +251,7 @@ def answering(p):
         payload = ({
         "inputs": {
             "question": Ques,
-            "context": p,
+            "context": randompicker()[i],
             },
         })
         output = requests.post(API_URL, headers=headers, json=payload)
