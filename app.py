@@ -247,18 +247,19 @@ def summarization():
 def answering():
     API_URL = "https://api-inference.huggingface.co/models/phiyodr/bart-large-finetuned-squad2"
     headers = {"Authorization": "Bearer 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"}
-    payload = ({
-    "inputs": {
-		"question": Ques,
-		"context": randompicker()[0][0],
-        },
-    })
-    output = requests.post(API_URL, headers=headers, json=payload)
-    response = output.json()
-    if response["answer"] ==  None:
-        response["answer"] = "Try once more!"
-    else:
-        st.write("Answer: " + response["answer"])
+    for i in range(len(final_passage)):
+        payload = ({
+        "inputs": {
+            "question": Ques,
+            "context": randompicker()[0][i],
+            },
+        })
+        output = requests.post(API_URL, headers=headers, json=payload)
+        response = output.json()
+        if response["answer"] ==  None:
+            response["answer"] = "Try once more!"
+        else:
+            st.write("Answer: " + response["answer"])
 
 
 def questioning():
@@ -277,4 +278,3 @@ if (not len(Ques)==0):
     query()
     answering()
     questioning()
-
