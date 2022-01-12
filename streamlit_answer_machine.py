@@ -216,7 +216,6 @@ def query():
         output = requests.post(API_URL, headers=headers, json=payload)
         response = output.json()
         Passage_topic.append(response)
-    return Question_topic, Passage_topic
 
 
 def query_result():
