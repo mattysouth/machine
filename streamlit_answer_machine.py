@@ -278,29 +278,17 @@ def questioning():
     
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
-    st.write("Question: " + response[0]["generated_text"])
-    st.write("Question: " + response[1]["generated_text"])
-    st.write("Question: " + response[2]["generated_text"])
+    if len(response[0]) != 0:
+        st.write("Question: " + response[0]["generated_text"])
+    if len(response[1]) != 0:    
+        st.write("Question: " + response[1]["generated_text"])
+    if len(response[2]) != 0:   
+        st.write("Question: " + response[2]["generated_text"])
     return response
 
 if (not len(Ques)==0):
     query()
     get_answer(randompicker()[0])
     questioning()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
