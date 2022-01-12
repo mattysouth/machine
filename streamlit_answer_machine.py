@@ -259,7 +259,7 @@ def answering(p):
         response = output.json()
         if len(response["answer"]) == 0:
             st.write("hmmmm...")
-        st.write("Answer: " + response["answer"])
+        st.form_submit_button("Answer: " + response["answer"])
 
 
 def get_answer(p_array):
@@ -279,16 +279,31 @@ def questioning():
     output = requests.post(API_URL, headers=headers, json=payload)
     response = output.json()
     if len(response[0]) != 0:
-        st.write("Question: " + response[0]["generated_text"])
+        st.form_submit_button("Question: " + response[0]["generated_text"])
     if len(response[1]) != 0:    
-        st.write("Question: " + response[1]["generated_text"])
+        st.form_submit_button("Question: " + response[1]["generated_text"])
     if len(response[2]) != 0:   
-        st.write("Question: " + response[2]["generated_text"])
+        st.form_submit_button("Question: " + response[2]["generated_text"])
     return response
 
 if (not len(Ques)==0):
     query()
     get_answer(randompicker()[0])
     questioning()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
