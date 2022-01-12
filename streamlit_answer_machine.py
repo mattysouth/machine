@@ -302,7 +302,6 @@ def questioning():
     return response
 
 if (not len(Ques)==0):
-    query()
     get_answer(randompicker()[0])
     questioning()
 
